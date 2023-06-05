@@ -70,12 +70,6 @@ export default function JenisKamar({ id }) {
             </div>
           </div>
         </div>
-        <div className="entry-copyright">
-          <p>
-            &copy; 2018 <a href="index.html">LeLuxe Hotel</a>. All Rights
-            Reserved. <a href="#">Privacy Policy</a>
-          </p>
-        </div>
       </div>
     </div>
   );

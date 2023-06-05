@@ -18,6 +18,8 @@ export default function AddMenuItem() {
     "tab-soups": [],
     "tab-desserts": [],
   });
+  const [editIndex, setEditIndex] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     fetchData();
@@ -25,33 +27,45 @@ export default function AddMenuItem() {
 
   const fetchData = async () => {
     try {
+      setIsLoading(true);
       const response = await axios.get(
         "https://647c5a8bc0bae2880ad09b73.mockapi.io/makanan/1"
       );
       const data = response.data;
 
       setMenuData(data);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const updatedTabData = [...menuData[activeTab], menuItem];
-      const updatedMenuData = {
-        ...menuData,
-        [activeTab]: updatedTabData,
-      };
+      setIsLoading(true);
+      if (editIndex !== null) {
+        // Update existing menu item
+        handleUpdate();
+      } else {
+        // Add new menu item
+        const updatedTabData = [...menuData[activeTab], menuItem];
+        const updatedMenuData = {
+          ...menuData,
+          [activeTab]: updatedTabData,
+        };
 
-      await axios.put(
-        `https://647c5a8bc0bae2880ad09b73.mockapi.io/makanan/1`,
-        updatedMenuData
-      );
+        await axios.put(
+          "https://647c5a8bc0bae2880ad09b73.mockapi.io/makanan/1",
+          updatedMenuData
+        );
 
-      console.log("Menu item added successfully");
-      setMenuData(updatedMenuData);
+        console.log("Menu item added successfully");
+        setMenuData(updatedMenuData);
+        fetchData(); // Refresh data
+      }
+
       setMenuItem({
         name: "",
         description: "",
@@ -60,13 +74,48 @@ export default function AddMenuItem() {
         image: "",
         caption: "",
       });
+      setEditIndex(null);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
+  };
+
+  const handleUpdate = async () => {
+    try {
+      setIsLoading(true);
+      const updatedTabData = [...menuData[activeTab]];
+      updatedTabData[editIndex] = menuItem;
+      const updatedMenuData = {
+        ...menuData,
+        [activeTab]: updatedTabData,
+      };
+
+      await axios.put(
+        "https://647c5a8bc0bae2880ad09b73.mockapi.io/makanan/1",
+        updatedMenuData
+      );
+
+      console.log("Menu item updated successfully");
+      setMenuData(updatedMenuData);
+      fetchData(); // Refresh data
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setIsLoading(false);
+    }
+  };
+
+  const handleEdit = (tabId, index) => {
+    const itemToEdit = menuData[tabId][index];
+    setMenuItem(itemToEdit);
+    setEditIndex(index);
   };
 
   const handleDelete = async (tabId, index) => {
     try {
+      setIsLoading(true);
       const updatedTabData = [...menuData[tabId]];
       updatedTabData.splice(index, 1);
       const updatedMenuData = {
@@ -75,14 +124,17 @@ export default function AddMenuItem() {
       };
 
       await axios.put(
-        `https://647c5a8bc0bae2880ad09b73.mockapi.io/makanan/1`,
+        "https://647c5a8bc0bae2880ad09b73.mockapi.io/makanan/1",
         updatedMenuData
       );
 
       console.log("Menu item deleted successfully");
       setMenuData(updatedMenuData);
+      fetchData(); // Refresh data
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
     }
   };
 
@@ -96,6 +148,10 @@ export default function AddMenuItem() {
 
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
+  };
+
+  const handleCancel = () => {
+    window.location.reload();
   };
 
   return (
@@ -145,7 +201,7 @@ export default function AddMenuItem() {
             className={activeTab === "tab-desserts" ? "tab-link-active" : ""}
             onClick={() => handleTabClick("tab-desserts")}
           >
-            Desert
+            Dessert
           </a>
         </li>
       </ul>
@@ -204,25 +260,35 @@ export default function AddMenuItem() {
             onChange={handleChange}
           />
         </label>
-        <button type="submit">Add Menu Item</button>
+        <button type="submit" disabled={isLoading}>
+          {editIndex !== null ? "Update" : "Add"} Menu Item
+        </button>
       </form>
+      <button onClick={handleCancel}>Cancel / Clear</button>
 
       {menuData[activeTab] && (
         <div className="menu-list">
           <h3>{activeTab}</h3>
-          <ul style={{ display: "flex", gap: "5rem" }}>
-            {menuData[activeTab].map((item, index) => (
-              <li
-                key={index}
-                style={{ listStyle: "none ", textAlign: "center" }}
-              >
-                <div>{item.name}</div>
-                <button onClick={() => handleDelete(activeTab, index)}>
-                  Delete
-                </button>
-              </li>
-            ))}
-          </ul>
+          {isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <ul style={{ display: "flex", gap: "5rem" }}>
+              {menuData[activeTab].map((item, index) => (
+                <li
+                  key={index}
+                  style={{ listStyle: "none ", textAlign: "center" }}
+                >
+                  <div>{item.name}</div>
+                  <button onClick={() => handleEdit(activeTab, index)}>
+                    Edit
+                  </button>
+                  <button onClick={() => handleDelete(activeTab, index)}>
+                    Delete
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
       )}
     </div>

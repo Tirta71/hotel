@@ -165,39 +165,6 @@ jQuery(function () {
       .addClass("tab-link-active");
   });
 
-  if (window.location.hash) {
-    var $active_tab = jQuery('.tabs a[href="' + window.location.hash + '"]'),
-      offset_correction;
-    if ($active_tab.length > 0) {
-      $active_tab.trigger("click");
-      jQuery(window).trigger("hashchange");
-      setTimeout(function () {
-        offset_correction = $menu.outerHeight();
-        window.scrollTo({
-          top:
-            $active_tab.parents(".tab-container").offset().top -
-            offset_correction,
-          behavior: "instant",
-        });
-      }, 1);
-    } else {
-      if (win_width >= 1200) {
-        offset_correction = $menu.outerHeight() + 60;
-      } else {
-        offset_correction = 60;
-      }
-      jQuery("body").animate(
-        {
-          scrollTop:
-            jQuery(window.location.hash).offset().top - offset_correction,
-          scrollLeft: 0,
-        },
-        {
-          duration: 300,
-        }
-      );
-    }
-  }
   jQuery(".tab-container").addClass("tabs-loaded");
 
   // Handle sharing widget
