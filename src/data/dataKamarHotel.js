@@ -1,0 +1,38 @@
+export const accommodations = [
+  {
+    id: 1,
+    title: "Single",
+    imageUrl: "tmp/sample-accomodation.jpg",
+    maxPerson: "Max. 1 person",
+    cancellation: "Free cancellation",
+    breakfast: "Good breakfast included",
+    price: 50,
+  },
+  {
+    id: 2,
+    title: "Double",
+    imageUrl: "tmp/sample-accomodation.jpg",
+    maxPerson: "Max. 2 person",
+    cancellation: "Free cancellation",
+    breakfast: "Good breakfast included",
+    price: 90,
+  },
+  {
+    id: 3,
+    title: "Superior",
+    imageUrl: "tmp/sample-accomodation.jpg",
+    maxPerson: "Max. 3 person",
+    cancellation: "Free cancellation",
+    breakfast: "Good breakfast included",
+    price: 120,
+  },
+  {
+    id: 4,
+    title: "President",
+    imageUrl: "tmp/sample-accomodation.jpg",
+    maxPerson: "Max. 2 person",
+    cancellation: "Free cancellation",
+    breakfast: "Good breakfast included",
+    price: 250,
+  },
+];
