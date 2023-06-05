@@ -8,13 +8,13 @@ export default function Logo() {
         <h1>
           <a href="/" class="custom-logo-link" rel="home">
             <img
-              src="tmp/logo.png"
+              src="tmp/Logo.ico"
               class="custom-logo dark"
               width="105"
               height="50"
             />
             <img
-              src="tmp/logo-light.png"
+              src="tmp/Logo.ico"
               class="custom-logo light"
               width="105"
               height="50"
