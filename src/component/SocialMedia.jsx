@@ -1,9 +1,9 @@
 import React from "react";
 
 const socialMediaLinks = [
-  { name: "Facebook", url: "http://facebook.com" },
-  { name: "Twitter", url: "http://twitter.com" },
-  { name: "Instagram", url: "http://instagram.com" },
+  { name: "Facebook", url: "https://www.facebook.com/HyattRegency/" },
+  { name: "Twitter", url: "https://twitter.com/hyattyogya" },
+  { name: "Instagram", url: "https://www.instagram.com/hyatt/" },
 ];
 
 function SocialProfiles() {

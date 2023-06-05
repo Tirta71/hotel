@@ -1,0 +1,30 @@
+ul.tabs {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-between;
+  background-color: #f2f2f2;
+  border-bottom: 1px solid #ccc;
+}
+
+ul.tabs li {
+  flex: 1;
+}
+
+ul.tabs li a {
+  display: block;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  color: #333;
+}
+
+ul.tabs li a:hover {
+  background-color: #ddd;
+}
+
+ul.tabs li a.tab-link-active {
+  background-color: royalblue;
+  color: #fff;
+}

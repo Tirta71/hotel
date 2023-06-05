@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-
+import NavbarAdmin from "../component/NavbarAdmin/NavbarAdmin";
+import "./css/tambahMenu.css";
 export default function AddMenuItem() {
   const [activeTab, setActiveTab] = useState("tab-breakfast");
   const [menuItem, setMenuItem] = useState({
@@ -155,142 +156,152 @@ export default function AddMenuItem() {
   };
 
   return (
-    <div style={{ margin: "0 10rem" }}>
-      <h2>Add New Menu Item</h2>
-      <h3>{activeTab}</h3>
-      <ul className="tabs clearfix">
-        <li>
-          <a
-            href="#tab-breakfast"
-            className={activeTab === "tab-breakfast" ? "tab-link-active" : ""}
-            onClick={() => handleTabClick("tab-breakfast")}
-          >
-            Breakfast
-          </a>
-        </li>
-        <li>
-          <a
-            href="#tab-starters"
-            className={activeTab === "tab-starters" ? "tab-link-active" : ""}
-            onClick={() => handleTabClick("tab-starters")}
-          >
-            Starters
-          </a>
-        </li>
-        <li>
-          <a
-            href="#tab-main-course"
-            className={activeTab === "tab-main-course" ? "tab-link-active" : ""}
-            onClick={() => handleTabClick("tab-main-course")}
-          >
-            Main Course
-          </a>
-        </li>
-        <li>
-          <a
-            href="#tab-soups"
-            className={activeTab === "tab-soups" ? "tab-link-active" : ""}
-            onClick={() => handleTabClick("tab-soups")}
-          >
-            Soups
-          </a>
-        </li>
-        <li>
-          <a
-            href="#tab-desserts"
-            className={activeTab === "tab-desserts" ? "tab-link-active" : ""}
-            onClick={() => handleTabClick("tab-desserts")}
-          >
-            Dessert
-          </a>
-        </li>
-      </ul>
-      <form onSubmit={handleSubmit}>
-        <label>
-          Name:
-          <input
-            type="text"
-            name="name"
-            value={menuItem.name}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Description:
-          <input
-            type="text"
-            name="description"
-            value={menuItem.description}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Price:
-          <input
-            type="text"
-            name="price"
-            value={menuItem.price}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Serving:
-          <input
-            type="text"
-            name="serving"
-            value={menuItem.serving}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Image:
-          <input
-            type="text"
-            name="image"
-            value={menuItem.image}
-            onChange={handleChange}
-          />
-        </label>
-        <label>
-          Caption:
-          <input
-            type="text"
-            name="caption"
-            value={menuItem.caption}
-            onChange={handleChange}
-          />
-        </label>
-        <button type="submit" disabled={isLoading}>
-          {editIndex !== null ? "Update" : "Add"} Menu Item
+    <>
+      <NavbarAdmin />
+      <div style={{ margin: "2rem 10rem" }}>
+        <h2>Add New Menu Item</h2>
+        <h3>{activeTab}</h3>
+        <ul className="tabs clearfix">
+          <li>
+            <a
+              href="#tab-breakfast"
+              className={activeTab === "tab-breakfast" ? "tab-link-active" : ""}
+              onClick={() => handleTabClick("tab-breakfast")}
+            >
+              Breakfast
+            </a>
+          </li>
+          <li>
+            <a
+              href="#tab-starters"
+              className={activeTab === "tab-starters" ? "tab-link-active" : ""}
+              onClick={() => handleTabClick("tab-starters")}
+            >
+              Starters
+            </a>
+          </li>
+          <li>
+            <a
+              href="#tab-main-course"
+              className={
+                activeTab === "tab-main-course" ? "tab-link-active" : ""
+              }
+              onClick={() => handleTabClick("tab-main-course")}
+            >
+              Main Course
+            </a>
+          </li>
+          <li>
+            <a
+              href="#tab-soups"
+              className={activeTab === "tab-soups" ? "tab-link-active" : ""}
+              onClick={() => handleTabClick("tab-soups")}
+            >
+              Soups
+            </a>
+          </li>
+          <li>
+            <a
+              href="#tab-desserts"
+              className={activeTab === "tab-desserts" ? "tab-link-active" : ""}
+              onClick={() => handleTabClick("tab-desserts")}
+            >
+              Dessert
+            </a>
+          </li>
+        </ul>
+        <form onSubmit={handleSubmit}>
+          <label>
+            Name:
+            <input
+              type="text"
+              name="name"
+              value={menuItem.name}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Description:
+            <input
+              type="text"
+              name="description"
+              value={menuItem.description}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Price:
+            <input
+              type="text"
+              name="price"
+              value={menuItem.price}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Serving:
+            <input
+              type="text"
+              name="serving"
+              value={menuItem.serving}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Image:
+            <input
+              type="text"
+              name="image"
+              value={menuItem.image}
+              onChange={handleChange}
+            />
+          </label>
+          <label>
+            Caption:
+            <input
+              type="text"
+              name="caption"
+              value={menuItem.caption}
+              onChange={handleChange}
+            />
+          </label>
+          <button type="submit" disabled={isLoading}>
+            {editIndex !== null ? "Update" : "Add"} Menu Item
+          </button>
+        </form>
+        <button
+          onClick={handleCancel}
+          style={{ transform: "translate(250px, -95px)" }}
+        >
+          Cancel / Clear
         </button>
-      </form>
-      <button onClick={handleCancel}>Cancel / Clear</button>
 
-      {menuData[activeTab] && (
-        <div className="menu-list">
-          <h3>{activeTab}</h3>
-          {isLoading ? (
-            <p>Loading...</p>
-          ) : (
-            <ul style={{ display: "flex", gap: "5rem" }}>
-              {menuData[activeTab].map((item, index) => (
-                <li
-                  key={index}
-                  style={{ listStyle: "none ", textAlign: "center" }}
-                >
-                  <div>{item.name}</div>
-                  <button onClick={() => handleEdit(activeTab, index)}>
-                    Edit
-                  </button>
-                  <button onClick={() => handleDelete(activeTab, index)}>
-                    Delete
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      )}
-    </div>
+        {menuData[activeTab] && (
+          <div className="menu-list">
+            <h3>{activeTab}</h3>
+            {isLoading ? (
+              <p>Loading...</p>
+            ) : (
+              <ul style={{ display: "flex", gap: "5rem" }}>
+                {menuData[activeTab].map((item, index) => (
+                  <li
+                    key={index}
+                    style={{ listStyle: "none ", textAlign: "center" }}
+                  >
+                    <div>{item.name}</div>
+                    <button onClick={() => handleEdit(activeTab, index)}>
+                      Edit
+                    </button>
+                    <button onClick={() => handleDelete(activeTab, index)}>
+                      Delete
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+      </div>
+    </>
   );
 }

@@ -14,17 +14,18 @@ import DiningRoom from "./pages/diningRoom";
 import Contact from "./pages/contact";
 import MyNavbar from "./component/myNavbar";
 import AddMenuItem from "./admin/tambahMenu";
+import TampilFormContact from "./admin/TampilFormContact";
 
 function Layout() {
   const location = useLocation();
 
   // Cek apakah rute saat ini adalah "admin-tambah"
   const isAddMenuItemPage = location.pathname === "/admin-tambah";
-
+  const isEditMenuItemPage = location.pathname === "/tampil-contact";
   return (
     <>
       {/* Tampilkan navbar hanya jika bukan halaman "admin-tambah" */}
-      {!isAddMenuItemPage && <MyNavbar />}
+      {!isAddMenuItemPage && !isEditMenuItemPage && <MyNavbar />}
       <Outlet />
     </>
   );
@@ -42,6 +43,7 @@ function App() {
           <Route path="/dining-room" element={<DiningRoom />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin-tambah" element={<AddMenuItem />} />
+          <Route path="/tampil-contact" element={<TampilFormContact />} />
         </Route>
       </Routes>
     </Router>
