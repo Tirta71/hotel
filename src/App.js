@@ -15,6 +15,7 @@ import Contact from "./pages/contact";
 import MyNavbar from "./component/myNavbar";
 import AddMenuItem from "./admin/tambahMenu";
 import TampilFormContact from "./admin/TampilFormContact";
+import TambahKamar from "./admin/TambahKamar";
 
 function Layout() {
   const location = useLocation();
@@ -22,10 +23,13 @@ function Layout() {
   // Cek apakah rute saat ini adalah "admin-tambah"
   const isAddMenuItemPage = location.pathname === "/admin-tambah";
   const isEditMenuItemPage = location.pathname === "/tampil-contact";
+  const isTambahKamarPage = location.pathname === "/admin-tambah-kamar";
   return (
     <>
       {/* Tampilkan navbar hanya jika bukan halaman "admin-tambah" */}
-      {!isAddMenuItemPage && !isEditMenuItemPage && <MyNavbar />}
+      {!isAddMenuItemPage && !isEditMenuItemPage && !isTambahKamarPage && (
+        <MyNavbar />
+      )}
       <Outlet />
     </>
   );
@@ -44,6 +48,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin-tambah" element={<AddMenuItem />} />
           <Route path="/tampil-contact" element={<TampilFormContact />} />
+          <Route path="/admin-tambah-kamar" element={<TambahKamar />} />
         </Route>
       </Routes>
     </Router>

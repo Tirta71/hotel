@@ -34,6 +34,15 @@ export default function NavbarAdmin() {
             Tampil contact
           </NavLink>
         </li>
+        <li className="navbar-item">
+          <NavLink
+            to="/admin-tambah-kamar"
+            className="navbar-link"
+            activeClassName="active-NavbarKu"
+          >
+            Tambah Kamar
+          </NavLink>
+        </li>
       </ul>
     </nav>
   );

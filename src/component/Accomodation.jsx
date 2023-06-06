@@ -31,7 +31,7 @@ function AccommodationListing() {
           <div className="entry-media">
             <a onClick={() => handleDetailClick(accommodation.id)}>
               <img
-                src={accommodation.images}
+                src={accommodation.images[0]}
                 width="1380"
                 height="500"
                 alt=""
