@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import FormBook from "../component/formBook";
+import FormBook from "../component/Booking/formBook";
 import Foto from "../assets/img/About/Thumbnail1.png";
 import Thumbail from "../assets/img/About/Yo-d2PV40hYhd.jpg";
 import { SecondAbout } from "../data/dataAbout";

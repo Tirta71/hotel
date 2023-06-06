@@ -8,7 +8,6 @@ export default function NavbarAdmin() {
       <ul className="navbar-list">
         <li className="navbar-item">
           <NavLink
-            exact
             to="/"
             className="navbar-link"
             activeClassName="active-NavbarKu"
@@ -41,6 +40,15 @@ export default function NavbarAdmin() {
             activeClassName="active-NavbarKu"
           >
             Tambah Kamar
+          </NavLink>
+        </li>
+        <li className="navbar-item">
+          <NavLink
+            to="/admin-checker"
+            className="navbar-link"
+            activeClassName="active-NavbarKu"
+          >
+            Admin Cek Tiket
           </NavLink>
         </li>
       </ul>

@@ -1,5 +1,5 @@
 import React from "react";
-import FormBook from "../component/formBook";
+import FormBook from "../component/Booking/formBook";
 import CarouselDining from "../component/Dining/CarouselDining";
 
 import TabDining from "../component/Dining/tabDining";

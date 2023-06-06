@@ -1,7 +1,14 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function AcomodationInfo({ kamarData }) {
+  const navigate = useNavigate();
+  const handleBooking = () => {
+    navigate("/detail-book");
+    window.location.reload();
+  };
+
   return (
     <div>
       <article className="entry-accomodation">
@@ -24,7 +31,7 @@ export default function AcomodationInfo({ kamarData }) {
             <span className="price">{kamarData.price.toLocaleString()}</span>
             <span className="price-per"> / night</span>
           </a>
-          <form className="form-booking-button" action="booking.html">
+          <form className="form-booking-button" onSubmit={handleBooking}>
             <button type="submit" className="button-color">
               Book Now
             </button>

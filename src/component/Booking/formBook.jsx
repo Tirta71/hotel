@@ -1,12 +1,18 @@
-/* eslint-disable jsx-a11y/anchor-has-content */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function FormBook() {
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate("/detail-book");
+  };
+
   return (
     <>
       <div className="booking-form">
-        <form action="booking.html">
+        <form onSubmit={handleSubmit}>
           <div className="field field-date field-separator field-checkin">
             <label>Check-in</label>
             <input
@@ -16,8 +22,8 @@ export default function FormBook() {
               value="2018-11-13"
             />
             <span className="field-value">
-              <span className="short">13 Nov 18</span>
-              <span className="long">13 November 2018</span>
+              <span className="short">13 Nov 2023</span>
+              <span className="long">13 November 2023</span>
             </span>
             <a href="#" className="mdi mdi-calendar-today"></a>
           </div>
@@ -30,8 +36,8 @@ export default function FormBook() {
               value="2018-11-21"
             />
             <span className="field-value">
-              <span className="short">21 Nov 18</span>
-              <span className="long">21 November 2018</span>
+              <span className="short">21 Nov 2023</span>
+              <span className="long">21 November 2023</span>
             </span>
             <a href="#" className="mdi mdi-calendar"></a>
           </div>

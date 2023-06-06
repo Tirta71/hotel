@@ -4,4 +4,5 @@ export const menuItems = [
   { path: "/pesan-kamar", label: "Living" },
   { path: "/dining-room", label: "Dining" },
   { path: "/contact", label: "Contact" },
+  { path: "/cek-ticket", label: "Cek Tiket" },
 ];

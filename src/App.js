@@ -17,6 +17,11 @@ import AddMenuItem from "./admin/tambahMenu";
 import TampilFormContact from "./admin/TampilFormContact";
 import TambahKamar from "./admin/TambahKamar";
 
+import Booking from "./pages/Booking";
+import DetailBookingTicket from "./pages/DetailBookingTiket";
+import TicketChecker from "./pages/CekTiket";
+import AdminChecker from "./admin/AdminChecker";
+
 function Layout() {
   const location = useLocation();
 
@@ -24,12 +29,15 @@ function Layout() {
   const isAddMenuItemPage = location.pathname === "/admin-tambah";
   const isEditMenuItemPage = location.pathname === "/tampil-contact";
   const isTambahKamarPage = location.pathname === "/admin-tambah-kamar";
+  const isAdminCheckPage = location.pathname === "/admin-checker";
+
   return (
     <>
       {/* Tampilkan navbar hanya jika bukan halaman "admin-tambah" */}
-      {!isAddMenuItemPage && !isEditMenuItemPage && !isTambahKamarPage && (
-        <MyNavbar />
-      )}
+      {!isAddMenuItemPage &&
+        !isEditMenuItemPage &&
+        !isTambahKamarPage &&
+        !isAdminCheckPage && <MyNavbar />}
       <Outlet />
     </>
   );
@@ -49,6 +57,13 @@ function App() {
           <Route path="/admin-tambah" element={<AddMenuItem />} />
           <Route path="/tampil-contact" element={<TampilFormContact />} />
           <Route path="/admin-tambah-kamar" element={<TambahKamar />} />
+          <Route path="/detail-book" element={<Booking />} />
+          <Route
+            path="/detail-booking-ticket"
+            element={<DetailBookingTicket />}
+          />
+          <Route path="/cek-ticket" element={<TicketChecker />} />
+          <Route path="/admin-checker" element={<AdminChecker />} />
         </Route>
       </Routes>
     </Router>
