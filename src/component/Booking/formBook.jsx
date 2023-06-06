@@ -7,6 +7,7 @@ export default function FormBook() {
   const handleSubmit = (e) => {
     e.preventDefault();
     navigate("/detail-book");
+    window.location.reload();
   };
 
   return (
