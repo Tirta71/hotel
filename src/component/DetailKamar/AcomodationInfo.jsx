@@ -1,12 +1,23 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 export default function AcomodationInfo({ kamarData }) {
   const navigate = useNavigate();
   const handleBooking = () => {
-    navigate("/detail-book");
-    window.location.reload();
+    if (kamarData.totalRoom === 0) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Room is fully booked",
+      });
+      navigate("/pesan-kamar");
+      window.location.reload();
+    } else {
+      navigate("/detail-book");
+      window.location.reload();
+    }
   };
 
   return (
@@ -32,9 +43,15 @@ export default function AcomodationInfo({ kamarData }) {
             <span className="price-per"> / night</span>
           </a>
           <form className="form-booking-button" onSubmit={handleBooking}>
-            <button type="submit" className="button-color">
-              Book Now
-            </button>
+            {kamarData.totalRoom === 0 ? (
+              <button type="button" className="button-color" disabled>
+                Room Full Booked
+              </button>
+            ) : (
+              <button type="submit" className="button-color">
+                Book Now
+              </button>
+            )}
             <div className="share-widget-container">
               <a href="#share-widget" className="button">
                 <span className="mdi mdi-share-variant"></span>

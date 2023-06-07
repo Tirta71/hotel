@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DataKamar } from "../../api/api";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 export default function DetailBooking() {
   const [dataBooking, setDataBooking] = useState([]);
@@ -16,6 +17,7 @@ export default function DetailBooking() {
     room: "",
     notes: "",
     roomPrice: "",
+    totalRoom: "",
   });
   const [roomPrice, setRoomPrice] = useState(0);
   const navigate = useNavigate();
@@ -35,18 +37,24 @@ export default function DetailBooking() {
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    let price = formData.roomPrice; // Tetapkan harga saat ini sebagai nilai default
 
     if (name === "room") {
       const selectedRoom = dataBooking.find((item) => item.name === value);
-      price = selectedRoom ? selectedRoom.price : 0;
-    }
+      const price = selectedRoom ? selectedRoom.price : 0;
+      const totalRoom = selectedRoom ? selectedRoom.totalRoom : 0;
 
-    setFormData({
-      ...formData,
-      [name]: value,
-      roomPrice: price,
-    });
+      setFormData({
+        ...formData,
+        [name]: value,
+        roomPrice: price,
+        totalRoom: totalRoom,
+      });
+    } else {
+      setFormData({
+        ...formData,
+        [name]: value,
+      });
+    }
   };
 
   useEffect(() => {
@@ -79,10 +87,45 @@ export default function DetailBooking() {
     }
 
     try {
-      navigate("/detail-booking-ticket", { state: formData });
-      window.location.reload();
+      // Temukan kamar yang dipilih berdasarkan nama
+      const selectedRoom = dataBooking.find(
+        (item) => item.name === formData.room
+      );
+
+      // Cek apakah kamar yang dipilih ada
+      if (!selectedRoom) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Selected room is not available",
+        });
+        return;
+      }
+
+      // Kurangi totalRoom sesuai dengan jumlah kamar yang dipesan
+      const updatedTotalRoom = selectedRoom.totalRoom - Number(formData.roomNo);
+
+      // Perbarui totalRoom di API kamar
+      const responseKamar = await axios.put(
+        `https://647c5a8bc0bae2880ad09b73.mockapi.io/kamar/${selectedRoom.id}`,
+        {
+          totalRoom: updatedTotalRoom,
+        }
+      );
+
+      Swal.fire({
+        icon: "success",
+        title: "Booking Successful! Next payment",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/detail-booking-ticket", { state: formData });
+          window.location.reload();
+        }
+      });
+
+      console.log("Total room diperbarui:", responseKamar.data);
     } catch (error) {
-      // ... error handling
+      console.error("Error submitting booking:", error);
     }
   };
 
@@ -194,6 +237,7 @@ export default function DetailBooking() {
               <p>Loading data...</p>
             )}
           </p>
+
           <p className="field-room-no">
             <label htmlFor="room-no">How many rooms</label>
             <select
@@ -220,13 +264,18 @@ export default function DetailBooking() {
             value={formData.notes}
             onChange={handleInputChange}
           ></textarea>
-          {formData.room && (
-            <h2>
-              <p className="price">
-                Room Price: Rp. {roomPrice.toLocaleString()} per night
-              </p>
-            </h2>
-          )}
+          <div className="price-section">
+            {formData.totalRoom > 0 ? (
+              <>
+                <h5>rest of the room {formData.totalRoom}</h5>
+                <h2>Room Price : Rp. {roomPrice.toLocaleString()} per night</h2>
+                <p className="price"></p>
+              </>
+            ) : (
+              <h2>Room Full Booked</h2>
+            )}
+          </div>
+
           <button className="button-filled button-color" onClick={handleSubmit}>
             Booking
           </button>

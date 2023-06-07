@@ -10,7 +10,7 @@ export default function TambahKamar() {
   const [capacity, setCapacity] = useState(0);
   const [images, setImages] = useState([]);
   const [amenities, setAmenities] = useState([]);
-
+  const [totalRoom, setTotalRoom] = useState(0);
   const [kamarList, setKamarList] = useState([]);
   const [selectedKamar, setSelectedKamar] = useState(null);
 
@@ -40,6 +40,7 @@ export default function TambahKamar() {
       capacity,
       images,
       amenities,
+      totalRoom,
     };
 
     try {
@@ -74,6 +75,7 @@ export default function TambahKamar() {
       setCapacity(0);
       setImages([]);
       setAmenities([]);
+      setTotalRoom(0);
 
       // Fetch updated data
       fetchData();
@@ -92,6 +94,7 @@ export default function TambahKamar() {
     setCapacity(kamar.capacity);
     setImages(kamar.images);
     setAmenities(kamar.amenities);
+    setTotalRoom(kamar.totalRoom);
   };
 
   const handleDelete = async (kamar) => {
@@ -170,6 +173,15 @@ export default function TambahKamar() {
             />
           </label>
           <label>
+            Total Room
+            <input
+              type="number"
+              value={totalRoom}
+              onChange={(e) => setTotalRoom(Number(e.target.value))}
+              required
+            />
+          </label>
+          <label>
             Gambar (pisahkan URL dengan koma):
             <input
               type="text"
@@ -216,6 +228,7 @@ export default function TambahKamar() {
                 <td>{kamar.breakfast}</td>
                 <td>{kamar.price}</td>
                 <td>{kamar.capacity}</td>
+                <td>{kamar.totalRoom}</td>
                 <td>
                   {kamar.images.map((image) => (
                     <img

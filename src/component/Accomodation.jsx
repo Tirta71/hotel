@@ -47,6 +47,11 @@ function AccommodationListing() {
             <ul>
               <li>Max. {accommodation.capacity} Person</li>
               <li>{accommodation.breakfast}</li>
+              {accommodation.totalRoom === 0 ? (
+                <li>Room Full Booked</li>
+              ) : (
+                <li>Rest of the room {accommodation.totalRoom}</li>
+              )}
             </ul>
             <a
               onClick={() => handleDetailClick(accommodation.id)}
