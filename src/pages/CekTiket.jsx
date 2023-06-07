@@ -13,14 +13,17 @@ export default function TicketChecker() {
   const fetchTicketData = async () => {
     try {
       const response = await axios.get(
-        `https://647c5a8bc0bae2880ad09b73.mockapi.io/booking?BookId=${ticketBookId}`
+        "https://647c5a8bc0bae2880ad09b73.mockapi.io/booking"
       );
-      if (response.data.length === 0) {
+      const ticket = response.data.find(
+        (ticket) => ticket.BookId === parseInt(ticketBookId)
+      );
+      if (ticket) {
+        setTicketData(ticket);
+        setError(null);
+      } else {
         setTicketData(null);
         setError("Ticket not found");
-      } else {
-        setTicketData(response.data[0]);
-        setError(null);
       }
     } catch (error) {
       setTicketData(null);
@@ -54,7 +57,7 @@ export default function TicketChecker() {
         <table>
           <thead>
             <tr>
-              <th>Ticket BookId</th>
+              <th>Ticket ID</th>
               <th>Name</th>
               <th>Email</th>
               <th>Check-in</th>
@@ -68,7 +71,7 @@ export default function TicketChecker() {
           </thead>
           <tbody>
             <tr key={ticketData.id}>
-              <td>{ticketData.BookId}</td>
+              <td>{ticketData.id}</td>
               <td>{ticketData.name}</td>
               <td>{ticketData.email}</td>
               <td>{ticketData.checkin}</td>

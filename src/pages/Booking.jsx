@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../component/Logo";
 import SocialProfiles from "../component/SocialMedia";
 
-import MyNavbar from "../component/myNavbar";
+import MyNavbar from "../component/MyNavbar/myNavbar";
 import CarouselBooking from "../component/Booking/CarouselBooking";
 import DetailBooking from "../component/Booking/DetailBooking";
 export default function Booking() {

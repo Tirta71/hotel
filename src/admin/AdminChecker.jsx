@@ -54,6 +54,7 @@ export default function AdminChecker() {
         <table>
           <thead>
             <tr>
+              <th>No</th>
               <th>Ticket ID</th>
               <th>Name</th>
               <th>Email</th>
@@ -61,7 +62,7 @@ export default function AdminChecker() {
               <th>Check-out</th>
               <th>Adults</th>
               <th>Children</th>
-              <th>Room No</th>
+              <th>Many Room</th>
               <th>Notes</th>
               <th>Status</th>
               <th>Action</th>
@@ -71,6 +72,7 @@ export default function AdminChecker() {
             {ticketData.map((ticket) => (
               <tr key={ticket.id}>
                 <td>{ticket.id}</td>
+                <td>{ticket.BookId}</td>
                 <td>{ticket.name}</td>
                 <td>{ticket.email}</td>
                 <td>{ticket.checkin}</td>

@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import MyNavbar from "../component/myNavbar";
+import MyNavbar from "../component/MyNavbar/myNavbar";
 import FormBook from "../component/Booking/formBook";
 import FotoHotel from "../assets/img/Home/yuliya-pankevich-oyxsG2Lh_uA-unsplash.jpg";
 import Logo from "../component/Logo";
 import SocialProfiles from "../component/SocialMedia";
+
 export default function Home() {
   return (
     <div className="home fullpage has-booking has-additional-menu-content">

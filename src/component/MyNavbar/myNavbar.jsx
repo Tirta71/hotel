@@ -1,6 +1,6 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
-import { menuItems } from "../data/dataNavbar";
+import { menuItems } from "../../data/dataNavbar";
 
 function MyNavbar() {
   const location = useLocation();

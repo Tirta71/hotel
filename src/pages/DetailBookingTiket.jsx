@@ -12,7 +12,7 @@ export default function DetailBookingTicket() {
       const response = await axios.post(
         "https://647c5a8bc0bae2880ad09b73.mockapi.io/booking",
         {
-          BookId: Math.floor(Math.random() * 1000), // Membuat ID pesanan secara acak
+          BookId: Math.floor(Math.random() * 100000), // Membuat ID pesanan secara acak
           name: formData.name,
           email: formData.email,
           checkin: formData.checkin,

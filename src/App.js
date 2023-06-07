@@ -12,7 +12,7 @@ import About from "./pages/About";
 import DetailKamar from "./pages/detailKamar";
 import DiningRoom from "./pages/diningRoom";
 import Contact from "./pages/contact";
-import MyNavbar from "./component/myNavbar";
+import MyNavbar from "./component/MyNavbar/myNavbar";
 import AddMenuItem from "./admin/tambahMenu";
 import TampilFormContact from "./admin/TampilFormContact";
 import TambahKamar from "./admin/TambahKamar";
