@@ -274,21 +274,30 @@ export default function DetailBooking() {
             value={formData.notes}
             onChange={handleInputChange}
           ></textarea>
-          <div className="price-section">
-            {formData.totalRoom > 0 ? (
+          <div className="price-section"></div>
+
+          {formData.room === "" ? null : formData.totalRoom === 0 ? (
+            <button
+              className="button-filled button-color"
+              onClick={handleSubmit}
+            >
+              Full Booked
+            </button>
+          ) : (
+            <h2>
               <>
                 <h5>rest of the room {formData.totalRoom}</h5>
-                <h2>Room Price : Rp. {roomPrice.toLocaleString()} per night</h2>
+                <h2>Room Price: Rp. {roomPrice.toLocaleString()} per night</h2>
                 <p className="price"></p>
+                <button
+                  className="button-filled button-color"
+                  onClick={handleSubmit}
+                >
+                  BOOKING NOW
+                </button>
               </>
-            ) : (
-              <h2>Room Full Booked</h2>
-            )}
-          </div>
-
-          <button className="button-filled button-color" onClick={handleSubmit}>
-            Booking
-          </button>
+            </h2>
+          )}
         </form>
       </div>
     </>
