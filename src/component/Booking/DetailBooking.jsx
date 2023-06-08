@@ -105,6 +105,16 @@ export default function DetailBooking() {
       // Kurangi totalRoom sesuai dengan jumlah kamar yang dipesan
       const updatedTotalRoom = selectedRoom.totalRoom - Number(formData.roomNo);
 
+      // Cek apakah kamar tersedia
+      if (updatedTotalRoom < 0) {
+        Swal.fire({
+          icon: "warning",
+          title: "Oops...",
+          text: "The room is fully booked",
+        });
+        return;
+      }
+
       // Perbarui totalRoom di API kamar
       const responseKamar = await axios.put(
         `https://647c5a8bc0bae2880ad09b73.mockapi.io/kamar/${selectedRoom.id}`,
